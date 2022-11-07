@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("VITE_DATABASE_URL")
+}
+
+model User {
+  id                 Int      @id @default(autoincrement())
+  createdAt          DateTime @default(now())
+  email              String   @unique
+  password           String
+  refreshToken       String
+  resetPasswordToken String
+}
+
+model Job {
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  jobId      Int
+  name       String   @unique
+  filetype   String
+  url        String   @unique
+  cron       String
+  halfMinute Boolean  @default(false)
+  headers    String?
+  parser     String?
+  enabled    Boolean  @default(true)
+  deleted    Boolean  @default(false)
+  events     Event[]
+  files      File[]
+}
+
+model Event {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  subject   String
+  body      String
+  job       Job      @relation(fields: [jobId], references: [id])
+  jobId     Int
+}
+
+model File {
+  id        BigInt   @id @default(autoincrement()) @db.BigInt
+  createdAt DateTime @default(now())
+  job       Job      @relation(fields: [jobId], references: [id])
+  jobId     Int
+}
