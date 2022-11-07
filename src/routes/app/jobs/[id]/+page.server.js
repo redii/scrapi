@@ -33,7 +33,7 @@ export const actions = {
 					},
 					json: {
 						job: {
-							enabled: data.get("enabled") ? true : false,
+							enabled: Boolean(data.get("enabled")),
 							title: data.get("name"),
 							url: `https://scraper.akmnn.de/api/scrape?token=${import.meta.env.VITE_SCRAPE_TOKEN}&job=${data.get("name")}`,
 							schedule: {
@@ -60,10 +60,11 @@ export const actions = {
 				filetype: data.get("filetype"),
 				url: data.get("url"),
 				cron: data.get("cron"),
-				halfMinute: data.get("halfMinute") ? true : false,
+				perMinute: data.get("perMinute"),
 				headers: data.get("headers"),
 				parser: data.get("parser"),
-				enabled: data.get("enabled") ? true : false
+				saveFile: Boolean(data.get("saveFile")),
+				enabled: Boolean(data.get("enabled"))
 			}
 		})
 

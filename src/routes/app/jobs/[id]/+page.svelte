@@ -32,9 +32,9 @@
 				<div
 					class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5"
 				>
-					<label for="name" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2"
-						>Name</label
-					>
+					<label for="name" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2">
+						Name
+					</label>
 					<div class="mt-1 sm:col-span-3 sm:mt-0">
 						<input
 							type="text"
@@ -64,9 +64,9 @@
 				<div
 					class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5"
 				>
-					<label for="cron" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2"
-						>Cron</label
-					>
+					<label for="cron" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2">
+						Cron
+					</label>
 					<div class="mt-1 sm:col-span-3 sm:mt-0">
 						<input
 							type="text"
@@ -76,15 +76,20 @@
 							class="p-2 inline w-full max-w-lg bg-gray-50 rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
 						/>
 						{#if job.cron === "* * * * *"}
-							<label for="halfMinute" class="ml-2 text-gray-700 text-sm">
-								<input
-									type="checkbox"
-									name="halfMinute"
-									id="halfMinute"
-									checked={job.halfMinute}
-									class="relative top-[2px]"
-								/>
-								Every 30 seconds
+							<label for="perMinute" class="sm:ml-2 text-gray-700 text-sm">
+								<select
+									name="perMinute"
+									id="perMinute"
+									value={job.perMinute}
+									class="p-2 w-12 bg-gray-50 rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm text-gray-700"
+								>
+									<option value={1}>1</option>
+									<option value={2}>2</option>
+									<option value={4}>4</option>
+									<option value={6}>6</option>
+									<option value={6}>12</option>
+								</select>
+								<span class="ml-2">per Minute</span>
 							</label>
 						{/if}
 					</div>
@@ -153,6 +158,16 @@
 								<option value={parser}>{parser}</option>
 							{/each}
 						</select>
+					</div>
+				</div>
+				<div
+					class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5"
+				>
+					<label for="saveFile" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2">
+						Save File
+					</label>
+					<div class="mt-1 sm:col-span-2 sm:mt-0">
+						<input type="checkbox" name="saveFile" id="saveFile" checked={job.saveFile} />
 					</div>
 				</div>
 				<div

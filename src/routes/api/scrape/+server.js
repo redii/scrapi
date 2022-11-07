@@ -35,35 +35,43 @@ export async function GET({ url }) {
 	)
 }
 
-async function scrape(job, preventHalfMinute = false) {
+async function scrape(job) {
 	try {
 		// scrape data from url
 		const response = await got.get(job.url, {
 			headers: job.headers ? JSON.parse(job.headers) : {}
 		})
 
-		// save file to database
-		const file = await prisma.file.create({ data: { jobId: job.id }, include: { job: true } })
+		// check if file should be saved
+		if (job.saveFile) {
+			// save file to database
+			const file = await prisma.file.create({ data: { jobId: job.id }, include: { job: true } })
 
-		// create directory if needed
-		if (!fs.existsSync(`${import.meta.env.VITE_FILES_PATH}/${job.name}`)) {
-			fs.mkdirSync(`${import.meta.env.VITE_FILES_PATH}/${job.name}`, { recursive: true })
+			// create directory if needed
+			if (!fs.existsSync(`${import.meta.env.VITE_FILES_PATH}/${job.name}`)) {
+				fs.mkdirSync(`${import.meta.env.VITE_FILES_PATH}/${job.name}`, { recursive: true })
+			}
+
+			// write scraped data to file if needed
+			await fs.writeFileSync(
+				`${import.meta.env.VITE_FILES_PATH}/${job.name}/${file.id}.${job.filetype}`,
+				response.body
+			)
 		}
-
-		// write scraped data to file
-		await fs.writeFileSync(
-			`${import.meta.env.VITE_FILES_PATH}/${job.name}/${file.id}.${job.filetype}`,
-			response.body
-		)
 
 		// execute parser for this job
-		if (file.job.parser && fs.existsSync(`parsers/${file.job.parser}.js`)) {
-			const parser = await import(/* @vite-ignore */ `../../../../parsers/${file.job.parser}.js`)
-			parser.default(file, response.body)
+		if (job.parser && fs.existsSync(`parsers/${job.parser}.js`)) {
+			const parser = await import(/* @vite-ignore */ `../../../../parsers/${job.parser}.js`)
+			parser.default(job, response.body)
 		}
 
-		// if halfMinute-job: execute scrape function again after 30 seconds
-		if (job.halfMinute && !preventHalfMinute) setTimeout(() => scrape(job, true), 30000)
+		// if perMinute > 1: execute scrape function multiple times
+		if (job.cron === "* * * * *" && job.perMinute > 1) {
+			const interval = (1000 * 60) / job.perMinute
+			for (let i = 1; i < job.perMinute; i++) {
+				setTimeout(() => scrape(job), interval * i)
+			}
+		}
 	} catch (err) {
 		console.log("🚨 Error while scraping:", job.name, err)
 	}

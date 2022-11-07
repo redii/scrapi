@@ -17,20 +17,21 @@ model User {
 }
 
 model Job {
-  id         Int      @id @default(autoincrement())
-  createdAt  DateTime @default(now())
-  jobId      Int
-  name       String   @unique
-  filetype   String
-  url        String   @unique
-  cron       String
-  halfMinute Boolean  @default(false)
-  headers    String?
-  parser     String?
-  enabled    Boolean  @default(true)
-  deleted    Boolean  @default(false)
-  events     Event[]
-  files      File[]
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  jobId     Int
+  name      String   @unique
+  filetype  String
+  url       String   @unique
+  cron      String
+  perMinute Int?
+  headers   String?
+  parser    String?
+  saveFile  Boolean  @default(true)
+  enabled   Boolean  @default(true)
+  deleted   Boolean  @default(false)
+  events    Event[]
+  files     File[]
 }
 
 model Event {

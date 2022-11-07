@@ -5,7 +5,7 @@ import fs from "fs"
 const discordUrl =
 	"https://discord.com/api/webhooks/1038806438509821952/8kj720MCjYqRRkJ39Y0gsj_UHezn2V7HIVJTe5OrEKqdHAtBUtrD3NZ26DbXlrZIDHW1"
 
-export default async function (file, data) {
+export default async function (job, data) {
 	try {
 		const json = JSON.parse(data).json
 
@@ -40,13 +40,13 @@ export default async function (file, data) {
 
 			await prisma.event.create({
 				data: {
-					jobId: file.job.id,
+					jobId: job.id,
 					subject: "Empty market",
 					body: `wood ${woodDiff}\nstone ${stoneDiff}\niron ${ironDiff}`
 				}
 			})
 		}
 	} catch (err) {
-		console.log("🚨 Parsing error:", file.job.name, err)
+		console.log("🚨 Parsing error:", job.name, err)
 	}
 }

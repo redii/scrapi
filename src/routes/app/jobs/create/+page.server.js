@@ -52,9 +52,10 @@ export const actions = {
 				filetype: data.get("filetype"),
 				url: data.get("url"),
 				cron: data.get("cron"),
-				halfMinute: data.get("halfMinute") ? true : false,
+				perMinute: Number(data.get("perMinute")),
 				headers: data.get("headers"),
-				parser: data.get("parser")
+				parser: data.get("parser"),
+				saveFile: Boolean(data.get("saveFile"))
 			}
 		})
 
