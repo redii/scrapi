@@ -18,11 +18,10 @@ export default async function (job, rawData, file = false) {
 					headers: JSON.parse(job.headers)
 				})
 				.json()
-			const l = response.json.ranklist
-			data.json.ranklist.concat(l)
+			data.json.ranklist = [...data.json.ranklist, ...response.json.ranklist]
 		}
 
-		// save data to existing file
+		// save complete data to existing file
 		await fs.writeFileSync(
 			`${import.meta.env.VITE_FILES_PATH}/${job.name}/${file.id}.${job.filetype}`,
 			JSON.stringify(data)
@@ -40,6 +39,9 @@ export default async function (job, rawData, file = false) {
 				`${import.meta.env.VITE_FILES_PATH}/${job.name}/${lastFile.id}.${job.filetype}`
 			)
 
+			// stop if data is missing in last file
+			if (data.json.ranklist.length <= 300) return
+
 			// check for missing players
 			let missingPlayers = []
 			for (let i = 0; i < 250; i++) {
@@ -52,8 +54,13 @@ export default async function (job, rawData, file = false) {
 			// if a player is missing post to discord
 			if (missingPlayers.length) {
 				let embeds = missingPlayers.map((player) => {
-					return { title: `${player.name} ghosted`, description: `Rank ${player.rank}` }
+					return {
+						title: `${player.name} ghosted`,
+						description: `Rank ${player.rank}`,
+						color: "16711680"
+					}
 				})
+
 				got.post(discordUrl, {
 					json: {
 						content: "@everyone",
