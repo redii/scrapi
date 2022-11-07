@@ -13,7 +13,7 @@ export async function GET({ url }) {
 		)
 
 	// get requested job from database
-	const job = await prisma.job.findUnique({
+	const job = await prisma.job.findFirst({
 		where: {
 			name: url.searchParams.get("job"),
 			enabled: true,
