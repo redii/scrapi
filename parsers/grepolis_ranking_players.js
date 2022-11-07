@@ -10,7 +10,7 @@ export default async function (job, rawData, file = false) {
 		let data = JSON.parse(rawData)
 
 		// get more players from ranking (300)
-		for (let i = 1; i <= 10; i++) {
+		for (let i = 1; i < 10; i++) {
 			let tmpUrl = job.url
 			tmpUrl.replace('"start_element":0', `"start_element":${30 * i}`)
 			const response = await got
