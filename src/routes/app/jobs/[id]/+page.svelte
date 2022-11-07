@@ -81,7 +81,7 @@
 									name="perMinute"
 									id="perMinute"
 									value={job.perMinute}
-									class="p-2 w-12 bg-gray-50 rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm text-gray-700"
+									class="p-2 pr-1 bg-gray-50 rounded-md border border-gray-200 shadow-sm text-right focus:border-blue-500 focus:ring-blue-500 sm:text-sm text-gray-700"
 								>
 									<option value={1}>1</option>
 									<option value={2}>2</option>
@@ -89,7 +89,7 @@
 									<option value={6}>6</option>
 									<option value={12}>12</option>
 								</select>
-								<span class="ml-2">per Minute</span>
+								<span class="ml-1">per Minute</span>
 							</label>
 						{/if}
 					</div>
@@ -184,7 +184,7 @@
 					<button
 						class="mt-6 inline-flex items-center justify-center rounded-md border border-transparent bg-blue-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:w-auto"
 					>
-						Speichern
+						Save
 					</button>
 				</div>
 			</div>

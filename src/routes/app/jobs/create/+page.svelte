@@ -76,7 +76,7 @@
 									name="perMinute"
 									id="perMinute"
 									value={1}
-									class="p-2 w-12 bg-gray-50 rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm text-gray-700"
+									class="p-2 pr-1 w-12 bg-gray-50 rounded-md border border-gray-200 shadow-sm text-right focus:border-blue-500 focus:ring-blue-500 sm:text-sm text-gray-700"
 								>
 									<option value={1}>1</option>
 									<option value={2}>2</option>
@@ -84,7 +84,7 @@
 									<option value={6}>6</option>
 									<option value={6}>12</option>
 								</select>
-								<span class="ml-2">per Minute</span>
+								<span class="ml-1">per Minute</span>
 							</label>
 						{/if}
 					</div>
