@@ -87,7 +87,7 @@
 									<option value={2}>2</option>
 									<option value={4}>4</option>
 									<option value={6}>6</option>
-									<option value={6}>12</option>
+									<option value={12}>12</option>
 								</select>
 								<span class="ml-2">per Minute</span>
 							</label>
