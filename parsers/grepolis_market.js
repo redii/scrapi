@@ -1,11 +1,15 @@
 import prisma from "$lib/utils/prisma"
 import got from "got"
-import fs from "fs"
+
+const threshold = {
+	normal: 5000,
+	urgent: 20000
+}
 
 const discordUrl =
 	"https://discord.com/api/webhooks/1038806438509821952/8kj720MCjYqRRkJ39Y0gsj_UHezn2V7HIVJTe5OrEKqdHAtBUtrD3NZ26DbXlrZIDHW1"
 
-export default async function (job, data) {
+export default async function (job, data, file = false) {
 	try {
 		const json = JSON.parse(data).json
 
@@ -16,30 +20,30 @@ export default async function (job, data) {
 		const stoneDiff = json.stone.capacity - json.stone.stock
 		const ironDiff = json.iron.capacity - json.iron.stock
 
-		if (woodDiff > 5000) {
-			if (woodDiff > 20000) urgent = true
+		if (woodDiff > threshold.normal) {
+			if (woodDiff > threshold.urgent) urgent = true
 			embeds.push({
 				title: "Wood",
 				description: `Missing: ${woodDiff}`,
-				color: woodDiff > 20000 ? "16711680" : null
+				color: woodDiff > threshold.urgent ? "16711680" : null
 			})
 		}
 
-		if (stoneDiff > 5000) {
-			if (stoneDiff > 20000) urgent = true
+		if (stoneDiff > threshold.normal) {
+			if (stoneDiff > threshold.urgent) urgent = true
 			embeds.push({
 				title: "Stone",
 				description: `Missing: ${stoneDiff}`,
-				color: stoneDiff > 20000 ? "16711680" : null
+				color: stoneDiff > threshold.urgent ? "16711680" : null
 			})
 		}
 
-		if (ironDiff > 5000) {
-			if (ironDiff > 20000) urgent = true
+		if (ironDiff > threshold.normal) {
+			if (ironDiff > threshold.urgent) urgent = true
 			embeds.push({
 				title: "Iron",
 				description: `Missing: ${ironDiff}`,
-				color: ironDiff > 20000 ? "16711680" : null
+				color: ironDiff > threshold.urgent ? "16711680" : null
 			})
 		}
 
@@ -47,7 +51,7 @@ export default async function (job, data) {
 		if (embeds.length) {
 			got.post(discordUrl, {
 				json: {
-					content: `${urgent ? "@everyone" : null}\n**${job.name.split("/")[3]}**`,
+					content: `${urgent ? "@everyone" : ""}\n**${job.name.split("/")[3]}**`,
 					embeds
 				}
 			})

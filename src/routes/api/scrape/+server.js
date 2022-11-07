@@ -49,9 +49,10 @@ async function scrape(job, preventPerMinute = false) {
 		})
 
 		// check if file should be saved
+		let file = false
 		if (job.saveFile) {
 			// save file to database
-			const file = await prisma.file.create({ data: { jobId: job.id }, include: { job: true } })
+			file = await prisma.file.create({ data: { jobId: job.id }, include: { job: true } })
 
 			// create directory if needed
 			if (!fs.existsSync(`${import.meta.env.VITE_FILES_PATH}/${job.name}`)) {
@@ -68,7 +69,7 @@ async function scrape(job, preventPerMinute = false) {
 		// execute parser for this job
 		if (job.parser && fs.existsSync(`parsers/${job.parser}.js`)) {
 			const parser = await import(/* @vite-ignore */ `../../../../parsers/${job.parser}.js`)
-			parser.default(job, response.body)
+			parser.default(job, response.body, file)
 		}
 
 		// if perMinute > 1: execute scrape function multiple times
