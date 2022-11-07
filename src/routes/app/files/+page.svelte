@@ -1,6 +1,10 @@
 <script>
+	import { page } from "$app/stores"
+
 	/** @type {import('./$types').PageData} */
 	export let data
+
+	$: pageNumber = Number($page.url.searchParams.get("page")) || 0
 </script>
 
 <svelte:head>
@@ -81,6 +85,27 @@
 						{/each}
 					</tbody>
 				</table>
+				<div class="w-full p-4 bg-gray-50 border-t border-gray-300 flex flex-row justify-between">
+					<a
+						href={pageNumber === 0 ? "#" : `/app/files?page=${pageNumber - 1}`}
+						class:text-gray-400={pageNumber === 0}
+					>
+						<!-- prettier-ignore -->
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+						</svg>
+					</a>
+					<span class="text-gray-600">Page {pageNumber + 1} of {Math.ceil(data.total / 10)}</span>
+					<!-- prettier-ignore -->
+					<a 
+						href={pageNumber + 1 === Math.ceil(data.total / 10) ? "#" : `/app/files?page=${pageNumber + 1}`}
+						class:text-gray-400={pageNumber + 1 === Math.ceil(data.total / 10)}>
+						<!-- prettier-ignore -->
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+						</svg>
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>
