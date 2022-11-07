@@ -34,13 +34,14 @@ export default async function (job, rawData, file = false) {
 		})
 
 		if (lastFile) {
-			// get rawData from last file
-			const lastData = await fs.readFileSync(
+			// get data from last file
+			const lastRawData = await fs.readFileSync(
 				`${import.meta.env.VITE_FILES_PATH}/${job.name}/${lastFile.id}.${job.filetype}`
 			)
+			const lastData = JSON.parse(lastRawData)
 
 			// stop if data is missing in last file
-			if (data.json.ranklist.length <= 300) return
+			if (lastData.json.ranklist.length <= 300) return
 
 			// check for missing players
 			let missingPlayers = []
