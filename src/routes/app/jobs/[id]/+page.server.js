@@ -60,7 +60,7 @@ export const actions = {
 				filetype: data.get("filetype"),
 				url: data.get("url"),
 				cron: data.get("cron"),
-				perMinute: data.get("perMinute"),
+				perMinute: Number(data.get("perMinute")),
 				headers: data.get("headers"),
 				parser: data.get("parser"),
 				saveFile: Boolean(data.get("saveFile")),

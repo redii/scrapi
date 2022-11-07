@@ -13,7 +13,13 @@ export async function GET({ url }) {
 		)
 
 	// get requested job from database
-	const job = await prisma.job.findUnique({ where: { name: url.searchParams.get("job") } })
+	const job = await prisma.job.findUnique({
+		where: {
+			name: url.searchParams.get("job"),
+			enabled: true,
+			deleted: false
+		}
+	})
 
 	// check if job exists
 	if (!job)
@@ -35,7 +41,7 @@ export async function GET({ url }) {
 	)
 }
 
-async function scrape(job) {
+async function scrape(job, preventPerMinute = false) {
 	try {
 		// scrape data from url
 		const response = await got.get(job.url, {
@@ -66,10 +72,10 @@ async function scrape(job) {
 		}
 
 		// if perMinute > 1: execute scrape function multiple times
-		if (job.cron === "* * * * *" && job.perMinute > 1) {
+		if (job.cron === "* * * * *" && job.perMinute > 1 && !preventPerMinute) {
 			const interval = (1000 * 60) / job.perMinute
 			for (let i = 1; i < job.perMinute; i++) {
-				setTimeout(() => scrape(job), interval * i)
+				setTimeout(() => scrape(job, true), interval * i)
 			}
 		}
 	} catch (err) {
