@@ -34,30 +34,34 @@ export default async function (job, rawData, file = false) {
 			orderBy: { id: "desc" }
 		})
 
-        if (lastFile) {
-            // get rawData from last file
-            const lastData = await fs.readFileSync(
-                `${import.meta.env.VITE_FILES_PATH}/${job.name}/${lastFile.id}.${job.filetype}`
-            )
-    
-            // check for missing players
-            let missingPlayers = []
-            for (let i = 0; i < 250; i++) {
-                const found = data.json.ranklist.find((player) => player.id === lastData.json.ranklist[i].id)
-                if (!found) missingPlayers.push(lastData.json.ranklist[i])
-            }
-    
-            // if a player is missing post to discord
-            if (missingPlayers.length) {
-                let embeds = missingPlayers.map(player => return { title: `${player.name} ghosted`, description: `Rank ${player.rank}`})
-                got.post(discordUrl, {
-                    json: {
-                        content: "@everyone",
-                        embeds
-                    }
-                })
-            }
-        }
+		if (lastFile) {
+			// get rawData from last file
+			const lastData = await fs.readFileSync(
+				`${import.meta.env.VITE_FILES_PATH}/${job.name}/${lastFile.id}.${job.filetype}`
+			)
+
+			// check for missing players
+			let missingPlayers = []
+			for (let i = 0; i < 250; i++) {
+				const found = data.json.ranklist.find(
+					(player) => player.id === lastData.json.ranklist[i].id
+				)
+				if (!found) missingPlayers.push(lastData.json.ranklist[i])
+			}
+
+			// if a player is missing post to discord
+			if (missingPlayers.length) {
+				let embeds = missingPlayers.map((player) => {
+					return { title: `${player.name} ghosted`, description: `Rank ${player.rank}` }
+				})
+				got.post(discordUrl, {
+					json: {
+						content: "@everyone",
+						embeds
+					}
+				})
+			}
+		}
 	} catch (err) {
 		console.log("🚨 Parsing error:", job.name, err)
 	}
