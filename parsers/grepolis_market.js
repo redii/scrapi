@@ -15,44 +15,52 @@ export default async function (job, data, file = false) {
 
 		// check for relevant changes
 		let urgent = false
-		let embeds = []
+		let fields = []
 		const woodDiff = json.wood.capacity - json.wood.stock
 		const stoneDiff = json.stone.capacity - json.stone.stock
 		const ironDiff = json.iron.capacity - json.iron.stock
 
 		if (woodDiff > threshold.normal) {
 			if (woodDiff > threshold.urgent) urgent = true
-			embeds.push({
-				title: "Wood",
-				description: `Missing: ${woodDiff}`,
-				color: woodDiff > threshold.urgent ? "16711680" : null
+			fields.push({
+				name: "Wood",
+				value: woodDiff,
+				inline: true
 			})
 		}
 
 		if (stoneDiff > threshold.normal) {
 			if (stoneDiff > threshold.urgent) urgent = true
-			embeds.push({
-				title: "Stone",
-				description: `Missing: ${stoneDiff}`,
-				color: stoneDiff > threshold.urgent ? "16711680" : null
+			fields.push({
+				name: "Stone",
+				value: stoneDiff,
+				inline: true
 			})
 		}
 
 		if (ironDiff > threshold.normal) {
 			if (ironDiff > threshold.urgent) urgent = true
-			embeds.push({
-				title: "Iron",
-				description: `Missing: ${ironDiff}`,
-				color: ironDiff > threshold.urgent ? "16711680" : null
+			fields.push({
+				name: "Iron",
+				value: ironDiff,
+				inline: true
 			})
 		}
 
 		// send messade to discord webhooks
-		if (embeds.length) {
+		if (fields.length) {
 			got.post(discordUrl, {
 				json: {
-					content: `${urgent ? "@everyone" : ""}\n**${job.name.split("/")[3]}**`,
-					embeds
+					content: "@everyone",
+					embeds: [
+						{
+							title: "Market emptied",
+							description: job.name.split("/")[3],
+							footer: { text: new Date().toLocaleString("de") },
+							color: urgent ? "16711680" : null,
+							fields
+						}
+					]
 				}
 			})
 
