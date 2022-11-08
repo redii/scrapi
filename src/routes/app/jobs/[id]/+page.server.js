@@ -9,7 +9,12 @@ export async function load({ params }) {
 	const job = await prisma.job.findUnique({
 		where: { id: Number(params.id) }
 	})
-	return { job, parsers }
+	const events = await prisma.event.findMany({
+		where: { jobId: job.id },
+		orderBy: { createdAt: "desc" },
+		take: 10
+	})
+	return { job, events, parsers }
 }
 
 /** @type {import('./$types').Actions} */

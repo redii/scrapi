@@ -13,7 +13,7 @@ export default async function (job, data, file = false) {
 	try {
 		const json = JSON.parse(data).json
 
-		// check for relevant changes
+		// check for emptied market
 		let urgent = false
 		let fields = []
 		const woodDiff = json.wood.capacity - json.wood.stock
