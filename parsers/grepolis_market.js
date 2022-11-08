@@ -67,7 +67,7 @@ export default async function (job, data, file = false) {
 			await prisma.event.create({
 				data: {
 					jobId: job.id,
-					subject: "Empty market",
+					subject: "Market emptied",
 					body: `wood ${woodDiff}\nstone ${stoneDiff}\niron ${ironDiff}`
 				}
 			})

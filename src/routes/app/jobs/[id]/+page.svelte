@@ -157,12 +157,12 @@
 			</div>
 		</div>
 	</form>
-	<div class="lg:w-72 p-4 bg-gray-50 border rounded-lg shadow">
+	<div class="lg:w-72 lg:max-h-[80vh] p-4 bg-gray-50 border rounded-lg shadow">
 		<div class="flex flex-col gap-4">
 			<h2 class="text-2xl font-bold">Latest Events</h2>
 			{#each data.events as event}
 				<div class="border border-gray-400 rounded-md">
-					<span class="block p-2 bg-blue-100 text-sm border-b border-gray-400 rounded-t-md">
+					<span class="block p-2 bg-gray-200 text-sm border-b border-gray-400 rounded-t-md">
 						{event.createdAt.toLocaleString("de")}
 					</span>
 					<div class="p-2 bg-white text-gray-700 rounded-b-md">
