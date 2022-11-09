@@ -65,7 +65,7 @@ export default async function (job, data, file = false) {
 						{
 							title: "Market emptied",
 							description: sea,
-							footer: { text: new Date().toLocaleString("de") },
+							footer: { text: new Date().toLocaleString("de-DE") },
 							color: urgent ? "16711680" : null,
 							fields
 						}
