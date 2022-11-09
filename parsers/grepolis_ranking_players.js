@@ -42,7 +42,7 @@ export default async function (job, rawData, file = false) {
 			let missingPlayers = []
 			for (let i = 0; i < 250; i++) {
 				const found = data.json.ranklist.find((player) => player.id === lastData.json.ranklist[i].id)
-				if (!found) missingPlayers.push(lastData.json.ranklist[i])
+				if (!found) missingPlayers = [...missingPlayers, lastData.json.ranklist[i]]
 			}
 
 			// if a player is missing post to discord
