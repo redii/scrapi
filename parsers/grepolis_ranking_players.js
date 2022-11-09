@@ -22,10 +22,7 @@ export default async function (job, rawData, file = false) {
 		}
 
 		// save complete data to existing file
-		await fs.writeFileSync(
-			`${import.meta.env.VITE_FILES_PATH}/${job.name}/${file.id}.${job.filetype}`,
-			JSON.stringify(data)
-		)
+		await fs.writeFileSync(`${import.meta.env.VITE_FILES_PATH}/${job.name}/${file.id}.${job.filetype}`, JSON.stringify(data))
 
 		// get data from last file scraped
 		const lastFile = await prisma.file.findFirst({
@@ -35,9 +32,7 @@ export default async function (job, rawData, file = false) {
 
 		if (lastFile) {
 			// get data from last file
-			const lastRawData = await fs.readFileSync(
-				`${import.meta.env.VITE_FILES_PATH}/${job.name}/${lastFile.id}.${job.filetype}`
-			)
+			const lastRawData = await fs.readFileSync(`${import.meta.env.VITE_FILES_PATH}/${job.name}/${lastFile.id}.${job.filetype}`)
 			const lastData = JSON.parse(lastRawData)
 
 			// stop if data is missing in last file
@@ -46,9 +41,7 @@ export default async function (job, rawData, file = false) {
 			// check for missing players
 			let missingPlayers = []
 			for (let i = 0; i < 250; i++) {
-				const found = data.json.ranklist.find(
-					(player) => player.id === lastData.json.ranklist[i].id
-				)
+				const found = data.json.ranklist.find((player) => player.id === lastData.json.ranklist[i].id)
 				if (!found) missingPlayers.push(lastData.json.ranklist[i])
 			}
 
@@ -66,6 +59,14 @@ export default async function (job, rawData, file = false) {
 					json: {
 						content: "@everyone",
 						embeds
+					}
+				})
+
+				await prisma.event.create({
+					data: {
+						jobId: job.id,
+						subject: "Player(s) ghosted",
+						body: missingPlayers[0].name
 					}
 				})
 			}
