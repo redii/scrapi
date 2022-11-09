@@ -36,7 +36,7 @@ export default async function (job, rawData, file = false) {
 			const lastData = JSON.parse(lastRawData)
 
 			// stop if data is missing in last file
-			if (lastData.json.ranklist.length <= 300) return
+			if (lastData.json.ranklist.length < 300) return
 
 			// check for missing players
 			let missingPlayers = []
