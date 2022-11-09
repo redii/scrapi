@@ -157,7 +157,7 @@
 			</div>
 		</div>
 	</form>
-	<div class="lg:w-72 lg:max-h-[80vh] p-4 bg-gray-50 border rounded-lg shadow">
+	<div class="lg:w-72 lg:max-h-[80vh] p-4 bg-gray-50 border rounded-lg shadow overflow-y-scroll">
 		<div class="flex flex-col gap-4">
 			<h2 class="text-2xl font-bold">Latest Events</h2>
 			{#each data.events as event}
