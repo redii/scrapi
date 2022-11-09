@@ -7,7 +7,7 @@ const threshold = {
 }
 
 const discordUrl =
-	"https://discord.com/api/webhooks/1038806438509821952/8kj720MCjYqRRkJ39Y0gsj_UHezn2V7HIVJTe5OrEKqdHAtBUtrD3NZ26DbXlrZIDHW1"
+	"https://discord.com/api/webhooks/1039886335693041764/JeeSiIN9helfO12Vsw6SgKrRZeu8DXyEM6ArZCUxTuPxEqzxgGNNnjtndLK9SsT0kBYi"
 
 export default async function (job, data, file = false) {
 	try {
