@@ -2,7 +2,7 @@ import prisma from "$lib/utils/prisma"
 import got from "got"
 
 const threshold = {
-	normal: 5000,
+	normal: 2500,
 	urgent: 20000
 }
 
