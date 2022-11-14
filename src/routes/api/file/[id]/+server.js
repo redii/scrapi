@@ -6,7 +6,7 @@ export async function GET({ url, params }) {
 		return new Response(
 			JSON.stringify({
 				success: false,
-				message: "token invalid"
+				message: "Token invalid"
 			})
 		)
 	}
@@ -15,9 +15,7 @@ export async function GET({ url, params }) {
 		where: { id: Number(params.id) },
 		include: { job: true }
 	})
-	const fileContent = await fs.readFileSync(
-		`${import.meta.env.VITE_FILES_PATH}/${file.job.name}/${file.id}.${file.job.filetype}`
-	)
+	const fileContent = await fs.readFileSync(`${import.meta.env.VITE_FILES_PATH}/${file.job.name}/${file.id}.${file.job.filetype}`)
 
 	return new Response(fileContent, {
 		headers: {
