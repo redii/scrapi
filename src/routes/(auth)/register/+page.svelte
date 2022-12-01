@@ -4,9 +4,7 @@
 
 <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
 	<div class="sm:mx-auto sm:w-full sm:max-w-md">
-		<h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-			Create a Account
-		</h2>
+		<h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Create an Account</h2>
 	</div>
 
 	<div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -41,9 +39,7 @@
 				</div>
 
 				<div>
-					<label for="password-confirm" class="block text-sm font-medium text-gray-700">
-						Confirm password
-					</label>
+					<label for="password-confirm" class="block text-sm font-medium text-gray-700"> Confirm password </label>
 					<div class="mt-1">
 						<input
 							id="password-confirm"

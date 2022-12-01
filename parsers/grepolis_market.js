@@ -3,11 +3,14 @@ import got from "got"
 
 const threshold = {
 	normal: 2500,
-	urgent: 20000
+	urgent: 20000,
 }
 
 // prettier-ignore
 const discordUrls = {
+	"de136": {
+		"sea45": "https://discord.com/api/webhooks/1047803616012021869/TjNBvhCroUaNQJbbcNxTPNDLHJ8osALY7OtIqmdK3RTjluQAOIL3CQFBnuhyMHP8SeiB"
+	},
 	"de135": {
 		"sea44": "https://discord.com/api/webhooks/1039888859690975294/V21S-P0jdL82siOidhUiWyeyrdx5968B_a5rEvqQzAthQkwI9OO7N29ybjIZ_lyzAT4L",
 		"sea45": "https://discord.com/api/webhooks/1039888945581924393/_7f9d_z1nSJUHiBWk7BRMx2Xz6ZBtp7cnNHd-1GjWC2tHA9aRw2LpGEx2FYTIzi3YOHy",
@@ -34,7 +37,7 @@ export default async function (job, data, file = false) {
 			fields.push({
 				name: "Wood",
 				value: woodDiff,
-				inline: true
+				inline: true,
 			})
 		}
 
@@ -43,7 +46,7 @@ export default async function (job, data, file = false) {
 			fields.push({
 				name: "Stone",
 				value: stoneDiff,
-				inline: true
+				inline: true,
 			})
 		}
 
@@ -52,7 +55,7 @@ export default async function (job, data, file = false) {
 			fields.push({
 				name: "Iron",
 				value: ironDiff,
-				inline: true
+				inline: true,
 			})
 		}
 
@@ -67,18 +70,18 @@ export default async function (job, data, file = false) {
 							description: sea,
 							footer: { text: new Date().toLocaleString("de-DE") },
 							color: urgent ? "16711680" : null,
-							fields
-						}
-					]
-				}
+							fields,
+						},
+					],
+				},
 			})
 
 			await prisma.event.create({
 				data: {
 					jobId: job.id,
 					subject: "Market emptied",
-					body: `wood ${woodDiff}\nstone ${stoneDiff}\niron ${ironDiff}`
-				}
+					body: `wood ${woodDiff}\nstone ${stoneDiff}\niron ${ironDiff}`,
+				},
 			})
 		}
 	} catch (err) {
