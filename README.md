@@ -31,10 +31,12 @@ As described in the [Prisma Schema](https://github.com/redii/scraper/blob/main/p
 Any job is synced with an Cronjob on cron-job.org via their REST API.
 
 #### Why the need for cron-job.org?
-I wanted this app to be as minimalistic as possible. Just the webapp and nothing more. So to keep everything in one project I had to outsource the cronjob functionality, which triggers the scraping job because continous background tasks are not supported by SvelteKit. And this way the cronjobs are editable on the fly.
+I wanted this app to be as minimalistic as possible. Just the webapp and nothing more. So to keep everything in one project I had to outsource the cronjob functionality, which triggers the scraping jobs because continuous background can not be executed in the same process as the web app. And this way the cronjobs are easily editable on the fly.
+
+cron-job.org offers a simple yet powerful functionalities to scheduly triggering specific HTTP endpoints, while offering a REST API to manage these jobs. [Please consider supporting them](https://cron-job.org/).
 
 ### Storing the data
-The data is stored raw as a file in the specified `filetype` under a given path. Every scraped file is also stored in the data base with the following data: `id`, `createdAt` and `jobId`
+When a job gets triggered via the [/api/scrape/[id]](https://github.com/redii/scraper/blob/main/src/routes/api/scrape/%5Bid%5D/%2Bserver.js) route, the app will scrape the given url using the HTTP GET method. The received raw data is than stored as a file in the specified `filetype` under a given path. Every scraped file gets stored in the database with the following data: `id`, `createdAt` and `jobId`
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -45,12 +47,12 @@ The data is stored raw as a file in the specified `filetype` under a given path.
 The scraped data can be accessed via the [/api/file/[id]](https://github.com/redii/scraper/blob/main/src/routes/api/file/%5Bid%5D/%2Bserver.js) Route.
 
 ### Parsing the data
-Each job needs its own parser. New parsers can be added by createing a new `.js` file inside the [/parsers](https://github.com/redii/scraper/tree/main/parsers) directory. This file should default export a function which gets 3 parameters: `job`, `rawData` and `file`
+Each job needs its own parser. New parsers can be added by creating a new `.js` file inside the [/parsers](https://github.com/redii/scraper/tree/main/parsers) directory. This file should default export a function which gets 3 parameters: `rawData`, `job` and `file`
 
 | Key | Type | Description |
 | --- | --- | --- |
-| `job` | Object | Job object of the current scraping process |
 | `rawData` | String | The rawData scraped from the endpoint |
+| `job` | Object | Job object of the current scraping process |
 | `file` | Int | File object of the current scraping process |
 
 As soon as the parser is stored in the [/parsers](https://github.com/redii/scraper/tree/main/parsers) directory, it can be selected from the web interface.
