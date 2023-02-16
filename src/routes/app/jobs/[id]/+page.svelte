@@ -60,7 +60,7 @@
 							type="text"
 							name="crontab"
 							id="crontab"
-							bind:value={job.cron}
+							bind:value={job.crontab}
 							class="mb-2 lg:mb-0 p-2 block lg:inline w-full max-w-lg bg-gray-50 rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
 						/>
 						{#if job.cron === "* * * * *"}
