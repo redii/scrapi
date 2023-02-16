@@ -19,7 +19,8 @@ As described in the [Prisma Schema](https://github.com/redii/scraper/blob/main/p
 | --- | --- | --- |
 | `id` | Int | Autoincrementing unique ID |
 | `createdAt` | DateTime | Datetime when the job was created |
-| `jobId` | Int | Cron Job ID on cron-job.org |
+| `cronjobId` | Int | Cron Job ID on cron-job.org |
+| `name` | String | Name of the job (ideally use a path like `/Topic/Subtopic/`) |
 | `filetype` | String | Specifies the filetype of the saved data (currently `html` or `json`) |
 | `url` | String | The URL which should be scraped |
 | `headers` | String? (JSON) | An JSON object containing header information for the scraping request |
@@ -36,7 +37,7 @@ I wanted this app to be as minimalistic as possible. Just the webapp and nothing
 cron-job.org offers a simple yet powerful functionalities to scheduly triggering specific HTTP endpoints, while offering a REST API to manage these jobs. [Please consider supporting them](https://cron-job.org/).
 
 ### Storing the data
-When a job gets triggered via the [/api/scrape/[id]](https://github.com/redii/scraper/blob/main/src/routes/api/scrape/%5Bid%5D/%2Bserver.js) route, the app will scrape the given url using the HTTP GET method. The received raw data is than stored as a file in the specified `filetype` under a given path. Every scraped file gets stored in the database with the following data: `id`, `createdAt` and `jobId`
+When a job gets triggered via the [/api/scrape/[id]](https://github.com/redii/scraper/blob/main/src/routes/api/scrape/%5Bid%5D/%2Bserver.js) route, the app will scrape the given url using the HTTP GET method. The received raw data is than stored as a file in the specified `filetype` under a given path followed by the jobs name (ideally use a path as job name to create a folder structure). Every scraped file gets stored in the database with the following data: `id`, `createdAt` and `jobId`
 
 | Key | Type | Description |
 | --- | --- | --- |
