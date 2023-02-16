@@ -15,6 +15,6 @@ ENV VITE_CRONJOBORG_TOKEN=$VITE_CRONJOBORG_TOKEN
 COPY . /tmp/app
 WORKDIR /tmp/app
 RUN npm install
-RUN npx prisma generate
+RUN npx prisma db push
 RUN npm run build
 CMD ["node", "build"]
