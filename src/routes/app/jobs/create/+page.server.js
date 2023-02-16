@@ -13,11 +13,25 @@ export async function load() {
 export const actions = {
 	default: async ({ request }) => {
 		const data = await request.formData()
-		const cronSplit = data.get("cron").split(" ")
+		const cronSplit = data.get("crontab").split(" ")
 
 		// check arguments
-		if (!data.get("name") || !data.get("filetype") || !data.get("cron") || !data.get("url"))
+		if (!data.get("name") || !data.get("filetype") || !data.get("crontab") || !data.get("url"))
 			throw error(400, "Missing argument(s)")
+
+		// save job in database
+		const job = await prisma.job.create({
+			data: {
+				name: data.get("name"),
+				filetype: data.get("filetype"),
+				url: data.get("url"),
+				crontab: data.get("crontab"),
+				perMinute: Number(data.get("perMinute")),
+				headers: data.get("headers"),
+				parser: data.get("parser"),
+				saveFile: Boolean(data.get("saveFile")),
+			},
+		})
 
 		// create job at cron-job.org
 		// prettier-ignore
@@ -29,8 +43,8 @@ export const actions = {
 			json: {
 				job: {
 					enabled: true,
-					title: data.get("name"),
-					url: `https://scraper.akmnn.de/api/scrape?job=${data.get("name")}&token=${import.meta.env.VITE_SCRAPE_TOKEN}`,
+					title: job.name,
+					url: `https://scraper.akmnn.de/api/scrape/${job.id}?token=${import.meta.env.VITE_SCRAPE_TOKEN}`,
 					saveResponses: true,
 					schedule: {
 						timezone: "Europe/Berlin",
@@ -44,21 +58,11 @@ export const actions = {
 			},
 		}).json()
 
-		// save job in database
-		await prisma.job.create({
-			data: {
-				jobId: response.jobId,
-				name: data.get("name"),
-				filetype: data.get("filetype"),
-				url: data.get("url"),
-				cron: data.get("cron"),
-				perMinute: Number(data.get("perMinute")),
-				headers: data.get("headers"),
-				parser: data.get("parser"),
-				saveFile: Boolean(data.get("saveFile"))
-			}
+		await prisma.job.update({
+			where: { id: job.id },
+			data: { cronjobId: response.jobId },
 		})
 
-		throw redirect(302, "/app/jobs")
-	}
+		throw redirect(302, `/app/jobs/${job.id}`)
+	},
 }

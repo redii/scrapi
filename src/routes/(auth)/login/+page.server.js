@@ -26,22 +26,21 @@ export const actions = {
 
 		const refreshToken = uuid()
 		const token = jwt.sign(user, import.meta.env.VITE_JWT_SECRET, {
-			expiresIn: 30 * 86400 // 30 days
+			expiresIn: 30 * 86400, // 30 days
 		})
 
 		cookies.set("refresh_token", refreshToken)
 		cookies.set("token", token, {
 			path: "/", // send cookie for every page
 			httpOnly: true, // server side only cookie so you can't use `document.cookie`
-			sameSite: "strict", // only requests from same site can send cookies
-			maxAge: 60 * 60 * 24 * 30 // set cookie to expire after a month
+			maxAge: 60 * 60 * 24 * 30, // set cookie to expire after a month
 		})
 
 		await prisma.user.update({
 			where: { email: data.get("email") },
-			data: { refreshToken }
+			data: { refreshToken },
 		})
 
 		throw redirect(302, "/")
-	}
+	},
 }

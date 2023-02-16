@@ -19,9 +19,9 @@ const discordUrls = {
 	}
 }
 
-export default async function (job, data, file = false) {
+export default async function (rawData, job, file = false) {
 	try {
-		const json = JSON.parse(data).json
+		const json = JSON.parse(rawData).json
 		const world = job.name.split("/")[1]
 		const sea = job.name.split("/")[3]
 
@@ -73,14 +73,6 @@ export default async function (job, data, file = false) {
 							fields,
 						},
 					],
-				},
-			})
-
-			await prisma.event.create({
-				data: {
-					jobId: job.id,
-					subject: "Market emptied",
-					body: `wood ${woodDiff}\nstone ${stoneDiff}\niron ${ironDiff}`,
 				},
 			})
 		}

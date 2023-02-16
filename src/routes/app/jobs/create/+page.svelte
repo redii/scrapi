@@ -26,12 +26,8 @@
 				</p>
 			</div>
 			<div class="space-y-6 sm:space-y-5">
-				<div
-					class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5"
-				>
-					<label for="name" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2">
-						Name
-					</label>
+				<div class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+					<label for="name" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2"> Name </label>
 					<div class="mt-1 sm:col-span-3 sm:mt-0">
 						<input
 							type="text"
@@ -41,12 +37,8 @@
 						/>
 					</div>
 				</div>
-				<div
-					class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5"
-				>
-					<label for="filetype" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2">
-						Filetype
-					</label>
+				<div class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+					<label for="filetype" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2"> Filetype </label>
 					<div class="mt-1 sm:col-span-3 sm:mt-0">
 						<input
 							type="text"
@@ -56,17 +48,13 @@
 						/>
 					</div>
 				</div>
-				<div
-					class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5"
-				>
-					<label for="cron" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2"
-						>Cron</label
-					>
+				<div class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+					<label for="crontab" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2">Cron</label>
 					<div class="mt-1 sm:col-span-3 sm:mt-0">
 						<input
 							type="text"
-							name="cron"
-							id="cron"
+							name="crontab"
+							id="crontab"
 							bind:value={newJob.cron}
 							class="p-2 inline w-full max-w-lg bg-gray-50 rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
 						/>
@@ -89,12 +77,8 @@
 						{/if}
 					</div>
 				</div>
-				<div
-					class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5"
-				>
-					<label for="cron" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2">
-						Url
-					</label>
+				<div class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+					<label for="url" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2">Url</label>
 					<div class="mt-1 sm:col-span-2 sm:mt-0">
 						<input
 							type="text"
@@ -104,21 +88,14 @@
 						/>
 					</div>
 				</div>
-				<div
-					class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5"
-				>
+				<div class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
 					{#if !showHeaders}
-						<button on:click={() => (showHeaders = true)} class="text-blue-500 text-left">
-							Add headers
-						</button>
+						<button on:click={() => (showHeaders = true)} class="text-blue-500 text-left">Add headers</button>
 					{:else}
 						<label for="headers" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2">
 							Headers
 							<span class="block text-sm font-light">JSON Object</span>
-							<button
-								on:click={() => (showHeaders = false)}
-								class="mt-2 text-blue-500 text-left font-normal"
-							>
+							<button on:click={() => (showHeaders = false)} class="mt-2 text-blue-500 text-left font-normal">
 								Remove headers
 							</button>
 						</label>
@@ -132,12 +109,8 @@
 						</div>
 					{/if}
 				</div>
-				<div
-					class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5"
-				>
-					<label for="parser" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2">
-						Parser
-					</label>
+				<div class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+					<label for="parser" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2">Parser</label>
 					<div class="mt-1 sm:col-span-1 sm:mt-0">
 						<select
 							name="parser"
@@ -152,12 +125,8 @@
 						</select>
 					</div>
 				</div>
-				<div
-					class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5"
-				>
-					<label for="saveFile" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2">
-						Save File
-					</label>
+				<div class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+					<label for="saveFile" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2">Save File</label>
 					<div class="mt-1 sm:col-span-2 sm:mt-0">
 						<input type="checkbox" name="saveFile" id="saveFile" checked={true} />
 					</div>

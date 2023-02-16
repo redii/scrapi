@@ -5,7 +5,7 @@ import fs from "fs"
 const discordUrl =
 	"https://discord.com/api/webhooks/1039253230149963786/tZAb_vF9Brw1R8rg92ioWwWHpc69QQPeL66QfoSu3xhAXsUtJ64cT1SBre2b6NsGYVyz"
 
-export default async function (job, rawData, file = false) {
+export default async function (rawData, job, file = false) {
 	try {
 		let data = JSON.parse(rawData)
 
@@ -15,7 +15,7 @@ export default async function (job, rawData, file = false) {
 			tmpUrl.replace('"start_element":0', `"start_element":${30 * i}`)
 			const response = await got
 				.get(tmpUrl, {
-					headers: JSON.parse(job.headers)
+					headers: JSON.parse(job.headers),
 				})
 				.json()
 			data.json.ranklist = [...data.json.ranklist, ...response.json.ranklist]
@@ -27,7 +27,7 @@ export default async function (job, rawData, file = false) {
 		// get data from last file scraped
 		const lastFile = await prisma.file.findFirst({
 			where: { jobId: job.id },
-			orderBy: { id: "desc" }
+			orderBy: { id: "desc" },
 		})
 
 		if (lastFile) {
@@ -51,23 +51,15 @@ export default async function (job, rawData, file = false) {
 					return {
 						title: `${player.name} ghosted`,
 						description: `Rank ${player.rank}`,
-						color: "16711680"
+						color: "16711680",
 					}
 				})
 
 				got.post(discordUrl, {
 					json: {
 						content: "@everyone",
-						embeds
-					}
-				})
-
-				await prisma.event.create({
-					data: {
-						jobId: job.id,
-						subject: "Player(s) ghosted",
-						body: missingPlayers[0].name
-					}
+						embeds,
+					},
 				})
 			}
 		}

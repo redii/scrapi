@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgres"
+  provider = "sqlite"
   url      = env("VITE_DATABASE_URL")
 }
 
@@ -19,32 +19,22 @@ model User {
 model Job {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
-  jobId     Int
+  cronjobId Int?
   name      String   @unique
   filetype  String
   url       String   @unique
-  cron      String
-  perMinute Int?
+  crontab   String
+  perMinute Int      @default(1)
   headers   String?
   parser    String?
   saveFile  Boolean  @default(true)
   enabled   Boolean  @default(true)
   deleted   Boolean  @default(false)
-  events    Event[]
   files     File[]
 }
 
-model Event {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  subject   String
-  body      String
-  job       Job      @relation(fields: [jobId], references: [id])
-  jobId     Int
-}
-
 model File {
-  id        BigInt   @id @default(autoincrement()) @db.BigInt
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   job       Job      @relation(fields: [jobId], references: [id])
   jobId     Int
