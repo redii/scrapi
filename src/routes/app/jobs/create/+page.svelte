@@ -40,7 +40,7 @@
 							type="text"
 							name="name"
 							id="name"
-							class="p-2 block w-full max-w-lg bg-gray-50 rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
+							class="p-2 block w-full max-w-lg rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
 						/>
 					</div>
 				</div>
@@ -58,7 +58,7 @@
 							type="text"
 							name="filetype"
 							id="filetype"
-							class="p-2 block w-full max-w-lg bg-gray-50 rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
+							class="p-2 block w-full max-w-lg rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
 						/>
 					</div>
 				</div>
@@ -75,7 +75,7 @@
 							name="crontab"
 							id="crontab"
 							bind:value={newJob.cron}
-							class="p-2 inline w-full max-w-lg bg-gray-50 rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
+							class="p-2 inline w-full max-w-lg rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
 						/>
 						{#if newJob.cron === "* * * * *"}
 							<label for="perMinute" class="sm:ml-2 text-gray-700 text-sm">
@@ -83,7 +83,7 @@
 									name="perMinute"
 									id="perMinute"
 									value={1}
-									class="p-2 pr-1 w-12 bg-gray-50 rounded-md border border-gray-200 shadow-sm text-right focus:border-blue-500 focus:ring-blue-500 sm:text-sm text-gray-700"
+									class="p-2 pr-1 w-12 rounded-md border border-gray-200 shadow-sm text-right focus:border-blue-500 focus:ring-blue-500 sm:text-sm text-gray-700"
 								>
 									<option value={1}>1</option>
 									<option value={2}>2</option>
@@ -108,7 +108,7 @@
 							type="text"
 							name="url"
 							id="url"
-							class="p-2 block w-full bg-gray-50 rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+							class="p-2 block w-full rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
 						/>
 					</div>
 				</div>
@@ -139,7 +139,7 @@
 								name="headers"
 								id="headers"
 								rows="8"
-								class="p-2 block w-full bg-gray-50 rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+								class="p-2 block w-full rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
 							/>
 						</div>
 					{/if}
@@ -157,7 +157,7 @@
 							name="parser"
 							id="parser"
 							value=""
-							class="p-2 block w-full bg-gray-50 rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm text-gray-700"
+							class="p-2 block w-full rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm text-gray-700"
 						>
 							<option value="">none</option>
 							{#each data.parsers as parser}
