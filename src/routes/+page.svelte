@@ -7,7 +7,7 @@
 	<title>Scraper 👋</title>
 </svelte:head>
 
-<div class="bg-white pb-20 lg:pb-28">
+<div class="pb-20 lg:pb-28">
 	<div class="relative mx-auto max-w-lg divide-y-2 divide-gray-200 lg:max-w-7xl">
 		<div>
 			<h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Welcome! 👋</h2>
