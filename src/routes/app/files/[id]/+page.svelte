@@ -44,7 +44,7 @@
 							id="name"
 							value={data.file.job.name}
 							disabled
-							class="p-2 inline mb-4 lg:mb-0 w-full max-w-lg rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
+							class="bg-white p-2 inline mb-4 lg:mb-0 w-full max-w-lg rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
 						/>
 						<a
 							href={`/app/jobs/${data.file.job.id}`}
@@ -70,7 +70,7 @@
 							id="createdAt"
 							value={data.file.createdAt.toLocaleString("de")}
 							disabled
-							class="p-2 block w-full max-w-lg rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
+							class="bg-white p-2 block w-full max-w-lg rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
 						/>
 					</div>
 				</div>
