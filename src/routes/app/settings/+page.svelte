@@ -33,7 +33,7 @@
 							id="databaseUrl"
 							value={data.databaseUrl}
 							disabled
-							class="p-2 block w-full max-w-lg rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
+							class="bg-white p-2 block w-full max-w-lg rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
 						/>
 					</div>
 				</div>
@@ -53,7 +53,7 @@
 							id="filesPath"
 							value={data.filesPath}
 							disabled
-							class="p-2 block w-full max-w-lg rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
+							class="bg-white p-2 block w-full max-w-lg rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
 						/>
 					</div>
 				</div>
@@ -73,7 +73,7 @@
 							id="scrapeToken"
 							value={data.scrapeToken}
 							disabled
-							class="p-2 block w-full max-w-lg rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
+							class="bg-white p-2 block w-full max-w-lg rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
 						/>
 					</div>
 				</div>
@@ -93,7 +93,7 @@
 							id="cronjoborgToken"
 							value={data.cronjoborgToken}
 							disabled
-							class="p-2 block w-full max-w-lg rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
+							class="bg-white p-2 block w-full max-w-lg rounded-md border border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:max-w-xs sm:text-sm"
 						/>
 					</div>
 				</div>
