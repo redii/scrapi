@@ -15,11 +15,22 @@
 				</a>
 				{#if data.user}
 					<div class="ml-10 hidden space-x-8 lg:block">
-						<a href="/app/jobs" class="text-base font-medium text-white hover:text-blue-50">Jobs</a>
-						<a href="/app/files" class="text-base font-medium text-white hover:text-blue-50">
+						<a
+							href="/app/jobs"
+							class="text-base font-medium text-white hover:text-blue-50"
+						>
+							Jobs
+						</a>
+						<a
+							href="/app/files"
+							class="text-base font-medium text-white hover:text-blue-50"
+						>
 							Files
 						</a>
-						<a href="/app/settings" class="text-base font-medium text-white hover:text-blue-50">
+						<a
+							href="/app/settings"
+							class="text-base font-medium text-white hover:text-blue-50"
+						>
 							Settings
 						</a>
 					</div>
@@ -46,8 +57,12 @@
 		</div>
 		{#if data.user}
 			<div class="flex flex-wrap justify-center space-x-6 py-4 lg:hidden">
-				<a href="/app/jobs" class="text-base font-medium text-white hover:text-blue-50">Jobs</a>
-				<a href="/app/files" class="text-base font-medium text-white hover:text-blue-50">Files</a>
+				<a href="/app/jobs" class="text-base font-medium text-white hover:text-blue-50">
+					Jobs
+				</a>
+				<a href="/app/files" class="text-base font-medium text-white hover:text-blue-50">
+					Files
+				</a>
 				<a href="/app/settings" class="text-base font-medium text-white hover:text-blue-50">
 					Settings
 				</a>

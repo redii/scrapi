@@ -3,7 +3,6 @@ import prisma from "$lib/utils/prisma"
 import got from "got"
 import fs from "fs"
 
-/** @type {import('./$types').PageLoad} */
 export async function load({ params }) {
 	const parsers = (await fs.readdirSync("parsers")).map((p) => p.split(".")[0])
 	const job = await prisma.job.findUnique({
@@ -12,12 +11,12 @@ export async function load({ params }) {
 	return { job, parsers }
 }
 
-/** @type {import('./$types').Actions} */
 export const actions = {
 	update: async ({ request, params }) => {
 		const data = await request.formData()
 
-		if (!data.get("name") || !data.get("crontab") || !data.get("url")) throw error(400, "Missing argument(s)")
+		if (!data.get("name") || !data.get("crontab") || !data.get("url"))
+			throw error(400, "Missing argument(s)")
 
 		const job = await prisma.job.findUnique({ where: { id: Number(params.id) } })
 		const cronSplit = data.get("crontab").split(" ")

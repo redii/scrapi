@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>Scraper: Settings</title>
+	<title>Scraper > Settings</title>
 </svelte:head>
 
 <div class="sm:flex sm:items-center">
@@ -20,7 +20,10 @@
 				<div
 					class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5"
 				>
-					<label for="databaseUrl" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2">
+					<label
+						for="databaseUrl"
+						class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2"
+					>
 						Database URL
 					</label>
 					<div class="mt-1 sm:col-span-3 sm:mt-0">
@@ -37,7 +40,10 @@
 				<div
 					class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5"
 				>
-					<label for="filesPath" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2">
+					<label
+						for="filesPath"
+						class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2"
+					>
 						Files Path
 					</label>
 					<div class="mt-1 sm:col-span-3 sm:mt-0">
@@ -54,7 +60,10 @@
 				<div
 					class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5"
 				>
-					<label for="scrapeToken" class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2">
+					<label
+						for="scrapeToken"
+						class="block text-md font-medium text-gray-700 sm:mt-px sm:pt-2"
+					>
 						Scrape Token
 					</label>
 					<div class="mt-1 sm:col-span-3 sm:mt-0">

@@ -8,7 +8,7 @@
 </script>
 
 <svelte:head>
-	<title>Scraper: Files</title>
+	<title>Scraper > Files</title>
 </svelte:head>
 
 <div class="sm:flex sm:items-center">
@@ -30,13 +30,22 @@
 							>
 								ID
 							</th>
-							<th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+							<th
+								scope="col"
+								class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+							>
 								Job
 							</th>
-							<th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+							<th
+								scope="col"
+								class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+							>
 								Date
 							</th>
-							<th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+							<th
+								scope="col"
+								class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+							>
 								File
 							</th>
 							<th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
@@ -85,7 +94,9 @@
 						{/each}
 					</tbody>
 				</table>
-				<div class="w-full p-4 bg-gray-50 border-t border-gray-300 flex flex-row justify-between">
+				<div
+					class="w-full p-4 bg-gray-50 border-t border-gray-300 flex flex-row justify-between"
+				>
 					<a
 						href={pageNumber === 0 ? "#" : `/app/files?page=${pageNumber - 1}`}
 						class:text-gray-400={pageNumber === 0}
@@ -95,12 +106,11 @@
 							<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
 						</svg>
 					</a>
-					<span class="text-gray-600">Page {pageNumber + 1} of {Math.ceil(data.total / 10)}</span>
+					<span class="text-gray-600">
+						Page {pageNumber + 1} of {Math.ceil(data.total / 10)}
+					</span>
 					<!-- prettier-ignore -->
-					<a 
-						href={pageNumber + 1 === Math.ceil(data.total / 10) ? "#" : `/app/files?page=${pageNumber + 1}`}
-						class:text-gray-400={pageNumber + 1 === Math.ceil(data.total / 10)}>
-						<!-- prettier-ignore -->
+					<a href={pageNumber + 1 === Math.ceil(data.total / 10) ? "#" : `/app/files?page=${pageNumber + 1}`} class:text-gray-400={pageNumber + 1 === Math.ceil(data.total / 10)}>
 						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 							<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
 						</svg>
