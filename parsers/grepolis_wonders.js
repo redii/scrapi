@@ -46,6 +46,7 @@ export default async function (rawData, job, file = false) {
     const lastFile = await prisma.file.findFirst({
       where: { jobId: job.id },
       orderBy: { id: "desc" },
+      skip: 1,
     })
 
     if (lastFile) {
@@ -68,9 +69,7 @@ export default async function (rawData, job, file = false) {
                   content: "@everyone",
                   embeds: [
                     {
-                      thumbnail: {
-                        url: `https://de136.grepolis.com/image.php?alliance_id=${alliance.alliance_id}`
-                      },                
+                      thumbnail: { url: `https://de136.grepolis.com/image.php?alliance_id=${alliance.alliance_id}` },
                       title: `${alliance.alliance_name} - ${wonder.label}`,
                       description: `Level ${lastDataAlliance[wonder.name].level} > ${alliance[wonder.name].level}`,
                       footer: { text: new Date().toLocaleString("de-DE") },
