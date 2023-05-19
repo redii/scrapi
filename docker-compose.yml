@@ -1,9 +1,19 @@
 version: "3.9"
 services:
-  scrapi:
+  scrapi-webapp:
+    container_name: scrapi-webapp
     image: akmann/scrapi:latest
+    restart: unless-stopped
+    environment:
+      - ORIGIN=https://...
     ports:
       - 3000:3000
+    volumes:
+      - scrapi:/data
+  scrapi-daemon:
+    container_name: scrapi-daemon
+    image: akmann/scrapi-daemon:latest
+    restart: unless-stopped
     volumes:
       - scrapi:/data
 volumes:
