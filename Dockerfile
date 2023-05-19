@@ -13,4 +13,4 @@ RUN npx prisma migrate deploy
 RUN npx prisma db seed
 RUN npm run build
 
-CMD node daemon && node build
+CMD node daemon.mjs && node build

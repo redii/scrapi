@@ -1,11 +1,10 @@
-version: "3"
+version: "3.9"
 services:
   scrapi:
-    image: scrapi
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     ports:
       - 3000:3000
     volumes:
       - scrapi:/data
+volumes:
+  scrapi:

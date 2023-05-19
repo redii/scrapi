@@ -3,7 +3,6 @@
 
   export let id,
     name,
-    webhookUrl,
     code = `function parser(rawData, job, request) {
   const data = JSON.parse(rawData)
   // Analyze the Data...

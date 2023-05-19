@@ -23,11 +23,21 @@ CREATE TABLE "Job" (
     "url" TEXT NOT NULL,
     "crontab" TEXT NOT NULL,
     "headers" TEXT,
-    "parser" TEXT,
     "saveFile" BOOLEAN NOT NULL DEFAULT true,
     "enabled" BOOLEAN NOT NULL DEFAULT true,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "Parser" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "name" TEXT NOT NULL,
+    "code" TEXT NOT NULL,
+    "jobId" TEXT NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL,
+    CONSTRAINT "Parser_jobId_fkey" FOREIGN KEY ("jobId") REFERENCES "Job" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
