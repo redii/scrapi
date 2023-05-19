@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   scrapi:
-    build: .
+    image: redii/scrapi:latest
     ports:
       - 3000:3000
     volumes:
