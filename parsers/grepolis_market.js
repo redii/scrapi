@@ -1,9 +1,8 @@
-import prisma from "$lib/utils/prisma"
 import got from "got"
 
 const threshold = {
-	normal: 2500,
-	urgent: 20000,
+  normal: 2500,
+  urgent: 20000,
 }
 
 // prettier-ignore
@@ -19,64 +18,64 @@ const discordUrls = {
 	}
 }
 
-export default async function (rawData, job, file = false) {
-	try {
-		const json = JSON.parse(rawData).json
-		const world = job.name.split("/")[1]
-		const sea = job.name.split("/")[3]
+export default async function (rawData, job, request = false) {
+  try {
+    const json = JSON.parse(rawData).json
+    const world = job.name.split("/")[1]
+    const sea = job.name.split("/")[3]
 
-		// check for emptied market
-		let urgent = false
-		let fields = []
-		const woodDiff = json.wood.capacity - json.wood.stock
-		const stoneDiff = json.stone.capacity - json.stone.stock
-		const ironDiff = json.iron.capacity - json.iron.stock
+    // check for emptied market
+    let urgent = false
+    let fields = []
+    const woodDiff = json.wood.capacity - json.wood.stock
+    const stoneDiff = json.stone.capacity - json.stone.stock
+    const ironDiff = json.iron.capacity - json.iron.stock
 
-		if (woodDiff > threshold.normal) {
-			if (woodDiff > threshold.urgent) urgent = true
-			fields.push({
-				name: "Wood",
-				value: woodDiff,
-				inline: true,
-			})
-		}
+    if (woodDiff > threshold.normal) {
+      if (woodDiff > threshold.urgent) urgent = true
+      fields.push({
+        name: "Wood",
+        value: woodDiff,
+        inline: true,
+      })
+    }
 
-		if (stoneDiff > threshold.normal) {
-			if (stoneDiff > threshold.urgent) urgent = true
-			fields.push({
-				name: "Stone",
-				value: stoneDiff,
-				inline: true,
-			})
-		}
+    if (stoneDiff > threshold.normal) {
+      if (stoneDiff > threshold.urgent) urgent = true
+      fields.push({
+        name: "Stone",
+        value: stoneDiff,
+        inline: true,
+      })
+    }
 
-		if (ironDiff > threshold.normal) {
-			if (ironDiff > threshold.urgent) urgent = true
-			fields.push({
-				name: "Iron",
-				value: ironDiff,
-				inline: true,
-			})
-		}
+    if (ironDiff > threshold.normal) {
+      if (ironDiff > threshold.urgent) urgent = true
+      fields.push({
+        name: "Iron",
+        value: ironDiff,
+        inline: true,
+      })
+    }
 
-		// send messade to discord webhooks
-		if (fields.length) {
-			got.post(discordUrls[world][sea], {
-				json: {
-					content: "@everyone",
-					embeds: [
-						{
-							title: "Market emptied",
-							description: sea,
-							footer: { text: new Date().toLocaleString("de-DE") },
-							color: urgent ? "16711680" : null,
-							fields,
-						},
-					],
-				},
-			})
-		}
-	} catch (err) {
-		console.log("🚨 Parsing error:", job.name, err)
-	}
+    // send messade to discord webhooks
+    if (fields.length) {
+      got.post(discordUrls[world][sea], {
+        json: {
+          content: "@everyone",
+          embeds: [
+            {
+              title: "Market emptied",
+              description: sea,
+              footer: { text: new Date().toLocaleString("de-DE") },
+              color: urgent ? "16711680" : null,
+              fields,
+            },
+          ],
+        },
+      })
+    }
+  } catch (err) {
+    console.log("🚨 Parsing error:", job.name, err)
+  }
 }

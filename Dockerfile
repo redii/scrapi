@@ -1,20 +1,16 @@
 FROM node:16.15.1-alpine
 
-ARG VITE_JWT_SECRET
-ARG VITE_SCRAPE_TOKEN
-ARG VITE_DATABASE_URL
-ARG VITE_FILES_PATH
-ARG VITE_CRONJOBORG_TOKEN
+# Enviroment Variables
+ENV ORIGIN "http://localhost:3000"
+ENV DATABASE_URL "file:/data/db.sqlite"
+ENV VITE_FILES_PATH "/data/files"
 
-ENV VITE_JWT_SECRET=$VITE_JWT_SECRET
-ENV VITE_SCRAPE_TOKEN=$VITE_SCRAPE_TOKEN
-ENV VITE_DATABASE_URL=$VITE_DATABASE_URL
-ENV VITE_FILES_PATH=$VITE_FILES_PATH
-ENV VITE_CRONJOBORG_TOKEN=$VITE_CRONJOBORG_TOKEN
-
-COPY . /tmp/app
-WORKDIR /tmp/app
+# Build SvelteKit App
+COPY . /app
+WORKDIR /app
 RUN npm install
-RUN npx prisma db push
+RUN npx prisma migrate deploy
+RUN npx prisma db seed
 RUN npm run build
-CMD ["node", "build"]
+
+CMD node daemon && node build

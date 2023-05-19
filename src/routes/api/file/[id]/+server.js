@@ -1,37 +1,33 @@
 import prisma from "$lib/utils/prisma"
 import fs from "fs"
 
-export async function GET({ url, params }) {
-	// check for scrape token
-	if (url.searchParams.get("token") !== import.meta.env.VITE_SCRAPE_TOKEN)
-		return new Response(
-			JSON.stringify({
-				success: false,
-				message: "Token invalid",
-			}),
-		)
+export async function GET({ locals, params }) {
+  // check for scrape token
+  if (!locals.user) return new Response("", { status: 403 })
 
-	// check for file id
-	if (!params.id)
-		return new Response(
-			JSON.stringify({
-				success: false,
-				message: "❌ No File ID provided",
-			}),
-		)
+  // check for request id
+  if (!params.id)
+    return new Response(
+      JSON.stringify({
+        success: false,
+        message: "❌ Request id missing",
+      })
+    )
 
-	// get file to display
-	const file = await prisma.file.findUnique({
-		where: { id: Number(params.id) },
-		include: { job: true },
-	})
+  // get request to display
+  const request = await prisma.request.findUnique({
+    where: { id: params.id },
+    include: { job: true },
+  })
 
-	// read file from filesystem
-	const fileContent = await fs.readFileSync(`${import.meta.env.VITE_FILES_PATH}/${file.job.name}/${file.id}.${file.job.filetype}`)
+  // read file from filesystem
+  const fileContent = await fs.readFileSync(
+    `${import.meta.env.VITE_FILES_PATH}/${request.job.name}/${request.id}`
+  )
 
-	return new Response(fileContent, {
-		headers: {
-			"content-type": "text/plain",
-		},
-	})
+  return new Response(fileContent, {
+    headers: {
+      "content-type": "text/plain",
+    },
+  })
 }

@@ -38,21 +38,21 @@ const wonders = [
   },
 ]
 
-export default async function (rawData, job, file = false) {
+export default async function (rawData, job, request = false) {
   try {
     let data = JSON.parse(rawData).json.models.WondersRanking.data
 
     // get data from last file scraped
-    const lastFile = await prisma.file.findFirst({
+    const lastRequest = await prisma.request.findFirst({
       where: { jobId: job.id },
       orderBy: { id: "desc" },
       skip: 1,
     })
 
-    if (lastFile) {
+    if (lastRequest) {
       // get data from last file
       const lastRawData = await fs.readFileSync(
-        `${import.meta.env.VITE_FILES_PATH}/${job.name}/${lastFile.id}.${job.filetype}`
+        `${import.meta.env.VITE_FILES_PATH}/${job.name}/${lastRequest.id}`
       )
       const lastData = JSON.parse(lastRawData).json.models.WondersRanking.data
 

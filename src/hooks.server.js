@@ -1,30 +1,28 @@
-import jwt from 'jsonwebtoken'
+import config from "$lib/utils/config"
+import jwt from "jsonwebtoken"
+import { redirect } from "@sveltejs/kit"
 
-/** @type {import('@sveltejs/kit').Handle} */
 export async function handle({ event, resolve }) {
-	try {
-		const token = event.cookies.get('token')
+  try {
+    const token = event.cookies.get("token")
+    if (token) {
+      // TODO: refresh token if needed
+      // update refreshToken in user object and reset refresh_token cookie
+      const user = jwt.verify(token, await config.get("JWT_SECRET"))
+      if (user.id) event.locals.user = user
+    }
 
-		if (token) {
-			// refresh token if needed
-			// update refreshToken in user object and reset refresh_token cookie
-			const result = jwt.verify(token, import.meta.env.VITE_JWT_SECRET)
-			if (result.id) event.locals.user = result
-		}
+    // redirect unauthenticated app requests
+    if (event.url.pathname.startsWith("/app") && !event.locals.user) {
+      return new Response("", {
+        headers: { Location: "/login" },
+        status: 302,
+      })
+    }
+  } catch (err) {
+    console.log(err)
+  }
 
-		// redirect unauthenticated app requests
-		if (event.url.pathname.startsWith('/app') && !event.locals.user) {
-			return new Response('', {
-				headers: { Location: '/' },
-				status: 302
-			})
-		}
-
-		const response = await resolve(event)
-		return response
-	} catch (err) {
-		console.log(err)
-		const response = await resolve(event)
-		return response
-	}
+  const response = await resolve(event)
+  return response
 }

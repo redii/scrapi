@@ -3,29 +3,27 @@ import prisma from "$lib/utils/prisma"
 import bcrypt from "bcrypt"
 import { v4 as uuid } from "uuid"
 
-/** @type {import('./$types').PageLoad} */
 export async function load({ locals }) {
-	const users = await prisma.user.findMany()
-	if (users.length) throw redirect(303, "/")
-	return
+  const users = await prisma.user.findMany()
+  if (users.length) throw redirect(303, "/")
+  return
 }
 
-/** @type {import('../../../../.svelte-kit/types/src/routes/auth/$types').Actions} */
 export const actions = {
-	default: async ({ request }) => {
-		const data = await request.formData()
+  default: async ({ request }) => {
+    const data = await request.formData()
 
-		const salt = await bcrypt.genSalt(10)
-		const hash = await bcrypt.hash(data.get("password"), salt)
-		const user = await prisma.user.create({
-			data: {
-				email: data.get("email"),
-				password: hash,
-				refreshToken: uuid(),
-				resetPasswordToken: uuid()
-			}
-		})
+    const salt = await bcrypt.genSalt(10)
+    const hash = await bcrypt.hash(data.get("password"), salt)
+    const user = await prisma.user.create({
+      data: {
+        email: data.get("email"),
+        password: hash,
+        refreshToken: uuid(),
+        resetPasswordToken: uuid(),
+      },
+    })
 
-		throw redirect(302, "/login")
-	}
+    throw redirect(302, "/login")
+  },
 }
