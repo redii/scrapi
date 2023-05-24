@@ -9,15 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - name: Docker Login
+      env:
+        DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+        DOCKER_ACCESSTOKEN: ${{secrets.DOCKER_ACCESSTOKEN}}
+      run: docker login -u $DOCKER_USERNAME -p $DOCKER_ACCESSTOKEN
     - name: Enter webapp folder
       run: cd webapp
+    - name: test
+      run: ls -la
     - name: Build the Scrapi Webapp Image
       run: docker build . --file Dockerfile --tag scrapi-webapp:$(date +%s)
-  build-daemon:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Enter daemon folder
-      run: cd daemon
-    - name: Build the Scrapi Daemon Image
-      run: docker build . --file Dockerfile --tag scrapi-daemon:$(date +%s)
