@@ -2,7 +2,7 @@
 
 **Scheduled API scraping made easy.**
 
-1. Setup Scraping Jobs with Endpoints, Headers and Cron-Syntax.
+1. Setup Scraping Jobs with Endpoints, Headers and Crontabs.
 2. Parse the returned data and send notifications if needed.
 3. Manage and monitor your Jobs using a webapp.
 
