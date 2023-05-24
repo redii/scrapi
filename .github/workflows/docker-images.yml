@@ -16,9 +16,9 @@ jobs:
           DOCKER_ACCESSTOKEN: ${{secrets.DOCKER_ACCESSTOKEN}}
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_ACCESSTOKEN
       - name: Build the Scrapi Webapp Image
-        run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USERNAME}}/scrapi-webapp:$(date +%s)
+        run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USERNAME}}/scrapi-webapp:latest
       - name: Docker Push
-        run: docker push ${{secrets.DOCKER_USERNAME}}/scrapi-webapp
+        run: docker push ${{secrets.DOCKER_USERNAME}}/scrapi-webapp:latest
   build-daemon:
     runs-on: ubuntu-latest
     defaults:
@@ -32,6 +32,6 @@ jobs:
           DOCKER_ACCESSTOKEN: ${{secrets.DOCKER_ACCESSTOKEN}}
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_ACCESSTOKEN
       - name: Build the Scrapi Daemon Image
-        run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USERNAME}}/scrapi-daemon:$(date +%s)
+        run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USERNAME}}/scrapi-daemon:latest
       - name: Docker Push
-        run: docker push ${{secrets.DOCKER_USERNAME}}/scrapi-daemon
+        run: docker push ${{secrets.DOCKER_USERNAME}}/scrapi-daemon:latest
