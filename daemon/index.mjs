@@ -3,7 +3,7 @@ import fs from "node:fs"
 import { Cron } from "croner"
 import got, { Options } from "got"
 
-import { PrismaClient } from "../prisma-client"
+import { PrismaClient } from "./prisma-client"
 const prisma = new PrismaClient()
 
 var log = console.log

@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../prisma-client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Config {
+  id    Int     @id @default(autoincrement())
+  key   String  @unique
+  value String?
+}
+
+model User {
+  id                 Int      @id @default(autoincrement())
+  email              String   @unique
+  password           String
+  refreshToken       String
+  resetPasswordToken String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model Job {
+  id         String    @id @default(uuid())
+  name       String    @unique
+  url        String
+  crontab    String
+  httpMethod String    @default("GET")
+  postData   String?
+  headers    String?
+  saveFile   Boolean   @default(true)
+  enabled    Boolean   @default(true)
+  parsers    Parser[]
+  requests   Request[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model Parser {
+  id        String   @id @default(uuid())
+  name      String
+  code      String
+  job       Job      @relation(fields: [jobId], references: [id])
+  jobId     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Request {
+  id        String   @id @default(uuid())
+  fileSaved Boolean  @default(true)
+  job       Job      @relation(fields: [jobId], references: [id])
+  jobId     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

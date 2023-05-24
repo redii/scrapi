@@ -7,13 +7,6 @@
     "dev": "nodemon index.mjs",
     "start": "node index.mjs"
   },
-  "prisma": {
-    "schema": "../prisma/schema.prisma"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/redii/scrapi-daemon.git"
-  },
   "devDependencies": {
     "nodemon": "^2.0.22",
     "prisma": "^4.14.1"

@@ -5,6 +5,3 @@ node_modules
 webapp/build
 /data
 vite.config.js.timestamp*
-prisma-client
-prisma/package.json
-prisma/package-lock.json
