@@ -1,9 +1,6 @@
 import { error, redirect } from "@sveltejs/kit"
 import Job from "$lib/classes/Job"
 import prisma from "$lib/utils/prisma"
-import config from "$lib/utils/config"
-import got from "got"
-import fs from "fs"
 
 export async function load({ params }) {
   try {

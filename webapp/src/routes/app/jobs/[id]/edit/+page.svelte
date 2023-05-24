@@ -17,7 +17,6 @@
   export let data
 
   $: job = data.job
-  $: showHeaders = Boolean(data.job.headers)
 
   function slugifyName() {
     job.name = slugify(job.name, {
