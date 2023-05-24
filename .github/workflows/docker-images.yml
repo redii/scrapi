@@ -1,0 +1,23 @@
+name: Docker Image CI
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  build-webapp:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Enter webapp folder
+      run: cd webapp
+    - name: Build the Scrapi Webapp Image
+      run: docker build . --file Dockerfile --tag scrapi-webapp:$(date +%s)
+  build-daemon:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Enter daemon folder
+      run: cd daemon
+    - name: Build the Scrapi Daemon Image
+      run: docker build . --file Dockerfile --tag scrapi-daemon:$(date +%s)
