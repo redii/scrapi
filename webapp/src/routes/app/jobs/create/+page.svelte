@@ -10,11 +10,7 @@
     Button,
   } from "$lib/components"
 
-  export let data
-
   let httpMethod = "GET"
-
-  $: showHeaders = false
 </script>
 
 <svelte:head>
