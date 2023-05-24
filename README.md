@@ -1,10 +1,19 @@
 # 👀 Scrapi
 
-Saw [this](https://www.dkriesel.com/spiegelmining) video on the CCC YouTube Account and wanted to scrape some data myself. So in order to do that, I wanted to build a platform which allows me to easily manage cronjobs to scrape data from a giving endpoint, save it and parse if needed.
+**Scheduled API scraping made easy.**
 
-## Techstack
+1. Setup Scraping Jobs with Endpoints, Headers and Cron-Syntax.
+2. Parse the returned data and send notifications if needed.
+3. Manage and monitor your Jobs using a webapp.
+
+## Webapp
 
 - [SvelteKit](https://kit.svelte.dev/)
 - [Prisma](https://www.prisma.io/)
 - [Tailwind](https://tailwindcss.com/)
-- ...
+
+## Daemon
+
+- [Prisma](https://www.prisma.io/)
+- [Croner](https://github.com/hexagon/croner)
+- [Got](https://github.com/sindresorhus/got)

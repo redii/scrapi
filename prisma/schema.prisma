@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "../prisma-client"
 }
 
 datasource db {
@@ -24,17 +25,19 @@ model User {
 }
 
 model Job {
-  id        String    @id @default(uuid())
-  name      String    @unique
-  url       String
-  crontab   String
-  headers   String?
-  saveFile  Boolean   @default(true)
-  enabled   Boolean   @default(true)
-  parsers   Parser[]
-  requests  Request[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id         String    @id @default(uuid())
+  name       String    @unique
+  url        String
+  crontab    String
+  httpMethod String    @default("GET")
+  postData   String?
+  headers    String?
+  saveFile   Boolean   @default(true)
+  enabled    Boolean   @default(true)
+  parsers    Parser[]
+  requests   Request[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
 }
 
 model Parser {

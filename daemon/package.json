@@ -1,0 +1,27 @@
+{
+  "name": "scrapi-daemon",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.mjs",
+  "scripts": {
+    "dev": "nodemon index.mjs",
+    "start": "node index.mjs"
+  },
+  "prisma": {
+    "schema": "../prisma/schema.prisma"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redii/scrapi-daemon.git"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "prisma": "^4.14.1"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.14.1",
+    "croner": "^6.0.3",
+    "form-data": "^4.0.0",
+    "got": "^12.6.0"
+  }
+}
