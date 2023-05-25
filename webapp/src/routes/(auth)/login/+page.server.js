@@ -18,9 +18,9 @@ export const actions = {
     const data = await request.formData()
     const user = await prisma.user.findUnique({ where: { email: data.get("email") } })
 
-    if (!user) return { success: false, message: "Benutzer existiert nicht." }
+    if (!user) return { success: false, message: "User does not exist." }
     const authenticated = await bcrypt.compare(data.get("password"), user.password)
-    if (!authenticated) return { success: false, message: "Passwort ist falsch." }
+    if (!authenticated) return { success: false, message: "Password is incorrect." }
 
     delete user.password
     delete user.refreshToken
@@ -28,7 +28,7 @@ export const actions = {
 
     const refreshToken = uuid()
     const token = jwt.sign(user, await config.get("JWT_SECRET"), {
-      expiresIn: 30 * 86400, // 30 days
+      expiresIn: 60 * 60 * 24 * 30, // 30 days
     })
 
     cookies.set("refresh_token", refreshToken)
@@ -43,6 +43,6 @@ export const actions = {
       data: { refreshToken },
     })
 
-    throw redirect(302, "/")
+    throw redirect(302, "/app")
   },
 }

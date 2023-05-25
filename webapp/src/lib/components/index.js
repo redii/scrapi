@@ -5,6 +5,7 @@ export { default as Button } from "./basic/Button.svelte"
 export { default as Table } from "./basic/Table.svelte"
 export { default as Link } from "./basic/Link.svelte"
 export { default as Modal } from "./basic/Modal.svelte"
+export { default as Alert } from "./basic/Alert.svelte"
 
 export { default as Stats } from "./basic/Stats.svelte"
 export { default as CodeEditor } from "./basic/CodeEditor.svelte"

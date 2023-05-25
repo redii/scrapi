@@ -13,7 +13,7 @@
     <div class="bg-gray-50 py-8 px-4 border shadow sm:rounded-lg sm:px-10">
       <form class="space-y-6" method="POST">
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-700"> Email address </label>
+          <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
           <div class="mt-1">
             <input
               id="email"
@@ -27,7 +27,7 @@
         </div>
 
         <div>
-          <label for="password" class="block text-sm font-medium text-gray-700"> Password </label>
+          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
           <div class="mt-1">
             <input
               id="password"

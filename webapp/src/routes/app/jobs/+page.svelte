@@ -8,7 +8,7 @@
 </svelte:head>
 
 <Heading title="Jobs" subtitle="Scheduled Jobs to scrape data">
-  <Button href="/app/jobs/create">
+  <Button href="/app/jobs/create" size="lg">
     <svg viewBox="0 0 28 28" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline">
       <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
     </svg>
