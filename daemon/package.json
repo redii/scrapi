@@ -7,6 +7,10 @@
     "dev": "nodemon index.mjs",
     "start": "node index.mjs"
   },
+  "prisma": {
+    "schema": "../prisma/schema.prisma",
+    "seed": "node prisma/seed.js"
+  },
   "devDependencies": {
     "nodemon": "^2.0.22",
     "prisma": "^4.14.1"

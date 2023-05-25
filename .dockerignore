@@ -9,4 +9,4 @@ docker-compose.yml
 public
 .svelte-kit
 build
-node_modules
+**/node_modules

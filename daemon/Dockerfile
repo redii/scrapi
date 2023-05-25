@@ -6,7 +6,7 @@ ENV FILES_PATH "/data/files"
 
 # Setup Daemon
 COPY . /app
-WORKDIR /app
+WORKDIR /app/daemon
 RUN npm install
 
 CMD node index.mjs

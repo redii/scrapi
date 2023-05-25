@@ -1,19 +1,21 @@
 # 👀 Scrapi
 
-**Scheduled API scraping made easy.**
+**Scheduled API scraping made easy 🤙🏼**
 
-1. Setup Scraping Jobs with Endpoints, Headers and Crontabs.
-2. Parse the returned data and send notifications if needed.
-3. Manage and monitor your Jobs using a webapp.
+1. Setup Scraping Jobs with Endpoints, Headers and Crontabs
+2. Parse the returned data and send notifications if needed
+3. Manage and monitor your Jobs using a webapp
 
-## Webapp
+## 👨‍💻 Webapp
 
-- [SvelteKit](https://kit.svelte.dev/)
-- [Prisma](https://www.prisma.io/)
-- [Tailwind](https://tailwindcss.com/)
+A SvelteKit application used to CRUD your scraping jobs.
 
-## Daemon
+The code can be found [here](https://github.com/redii/scrapi/tree/main/webapp).
 
-- [Prisma](https://www.prisma.io/)
-- [Croner](https://github.com/hexagon/croner)
-- [Got](https://github.com/sindresorhus/got)
+## ⏰ Daemon
+
+A Node.js Script scheduling scraping jobs and executing parser functions.
+
+Parser functions are used to analyze the data and send out notifications if needed.
+
+The code can be found [here](https://github.com/redii/scrapi/tree/main/webapp).

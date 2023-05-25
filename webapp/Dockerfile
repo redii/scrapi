@@ -7,7 +7,8 @@ ENV VITE_FILES_PATH "/data/files"
 
 # Build SvelteKit App
 COPY . /app
-WORKDIR /app
+WORKDIR /app/webapp
+RUN ls -l
 RUN npx prisma migrate deploy
 RUN npm install
 RUN npm run build
