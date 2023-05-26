@@ -10,7 +10,7 @@
 	},
 	"prisma": {
 		"schema": "../prisma/schema.prisma",
-		"seed": "node prisma/seed.js"
+		"seed": "node ../prisma/seed.js"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-node": "1.0.0-next.100",
