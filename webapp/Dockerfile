@@ -8,10 +8,10 @@ ENV VITE_FILES_PATH "/scrapi/data/files"
 # Build SvelteKit App
 COPY . /scrapi
 WORKDIR /scrapi/webapp
+RUN npm install
 RUN npx prisma migrate deploy
 RUN npx prisma generate
 RUN npx prisma db seed
-RUN npm install
 RUN npm run build
 
 CMD node build
