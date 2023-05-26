@@ -24,6 +24,6 @@ export const actions = {
       },
     })
 
-    throw redirect(302, "/login&register=true")
+    throw redirect(302, "/login?register=true")
   },
 }

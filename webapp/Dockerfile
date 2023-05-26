@@ -9,6 +9,7 @@ ENV VITE_FILES_PATH "/scrapi/data/files"
 COPY . /scrapi
 WORKDIR /scrapi/webapp
 RUN npx prisma migrate deploy
+RUN npx prisma db seed
 RUN npm install
 RUN npm run build
 
