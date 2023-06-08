@@ -1,6 +1,5 @@
 FROM node:16.15.1-alpine
 
-# Enviroment Variables
 ENV ORIGIN "http://localhost:3000"
 ENV DATABASE_URL "file:/scrapi/data/db.sqlite"
 ENV VITE_FILES_PATH "/scrapi/data/files"
@@ -9,9 +8,10 @@ ENV VITE_FILES_PATH "/scrapi/data/files"
 COPY . /scrapi
 WORKDIR /scrapi/webapp
 RUN npm install
-RUN npx prisma migrate deploy
+# RUN npx prisma migrate deploy
 RUN npx prisma generate
-RUN npx prisma db seed
+# RUN npx prisma db seed
 RUN npm run build
 
-CMD node build
+RUN chmod +x entrypoint.sh
+ENTRYPOINT [ "./entrypoint.sh" ]
