@@ -36,6 +36,7 @@ export const actions = {
       path: "/", // send cookie for every page
       httpOnly: true, // server side only cookie so you can't use `document.cookie`
       maxAge: 60 * 60 * 24 * 30, // set cookie to expire after a month
+      secure: false, // allow cookie to be sent over insecure connections (http)
     })
 
     await prisma.user.update({
